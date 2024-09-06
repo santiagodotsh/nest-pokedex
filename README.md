@@ -10,6 +10,12 @@ $ npm install
 $ docker compose up
 ```
 
+## Run SEED
+
+```bash
+$ http://localhost:3000/api/v2/seed
+```
+
 ## Compile and run the project
 
 ```bash
