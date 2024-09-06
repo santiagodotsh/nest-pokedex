@@ -6,12 +6,12 @@ import { MongooseModule } from '@nestjs/mongoose'
 import { CommonModule } from './common/common.module'
 import { PokemonModule } from './pokemon/pokemon.module'
 import { SeedModule } from './seed/seed.module'
-import { AppConfig } from './config/app.config'
+import { JoiValidationSchema } from './config/joi.validaton'
 
 @Module({
   imports: [
     ConfigModule.forRoot({
-      load: [AppConfig]
+      validationSchema: JoiValidationSchema
     }),
     ServeStaticModule.forRoot({
       rootPath: join(__dirname,'..','public')

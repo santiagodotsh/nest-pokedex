@@ -22,7 +22,7 @@ export class PokemonService {
 
     configService: ConfigService
   ) {
-    this.defaultLimit = configService.get<number>('defaultLimit')
+    this.defaultLimit = configService.get<number>('DEFAULT_LIMIT')
   }
 
   async create(createPokemonDto: CreatePokemonDto) {
