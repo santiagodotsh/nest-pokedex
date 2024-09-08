@@ -7,7 +7,7 @@ $ npm install
 ## Config environment 
 
 ```bash
-$ # copy .env.temple to .env
+$ # copy .env.template to .env
 ```
 
 ## Start database
@@ -33,6 +33,20 @@ $ npm run start:prod
 
 ```bash
 $ http://localhost:3000/api/v2/seed
+```
+
+## Production build with Docker
+
+1. Create `.env.prod` file.
+2. Fill environment variables.
+3. Execute commands.
+
+```bash
+# build
+$ docker compose -f docker-compose.prod.yaml --env-file .env.prod up --build
+
+# run
+$ docker compose -f docker-compose.prod.yaml --env-file .env.prod up
 ```
 
 ## Run tests

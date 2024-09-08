@@ -1,5 +1,17 @@
 /dist
+/mongo
 /node_modules
+/test
 /.git
 
+README.md
+
 .gitignore
+.dockerignore
+.env
+.env.prod
+.env.template
+
+Dockerfile
+docker-compose.yaml
+docker-compose.prod.yaml

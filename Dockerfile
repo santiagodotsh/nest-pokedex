@@ -1,17 +1,24 @@
-FROM node:18-alpine3.15
+FROM node:18-alpine3.15 AS deps
 
-RUN mkdir -p /var/www/pokedex
-WORKDIR /var/www/pokedex
+RUN apk add --no-cache libc6-compat
+WORKDIR /app
+COPY package.json package-lock.json .
+RUN npm ci
 
+
+FROM node:18-alpine3.15 AS builder
+
+WORKDIR /app
+COPY --from=deps /app/node_modules ./node_modules
 COPY . .
-COPY package.json tsconfig.json tsconfig.build.json .
-RUN npm install
 RUN npm run build
 
-RUN adduser --disabled-password pokeuser
-RUN chown -R pokeuser:pokeuser .
-USER pokeuser
 
-EXPOSE 3000
+FROM node:18-alpine3.15 AS runner
 
-CMD ["npm", "run", "start:prod"]
+WORKDIR /usr/src/app
+COPY package.json package-lock.json .
+RUN npm install --prod
+COPY --from=builder /app/dist ./dist
+
+CMD ["node", "dist/main"]
